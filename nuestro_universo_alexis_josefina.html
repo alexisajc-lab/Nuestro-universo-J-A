@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080d1c">
+<title>Alexis & Josefina — Nuestro pequeño universo</title>
+<style>
+:root{--bg:#070b18;--panel:#10182b;--panel2:#151f36;--blue:#8ebcff;--pale:#eaf3ff;--pink:#f3b7d7;--muted:#aab8d1;--line:#2a3856;--gold:#f4d8a5}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(ellipse at 50% -10%,#1c3156 0,transparent 46%),var(--bg);color:var(--pale);font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6;overflow-x:hidden}
+button,input{font:inherit}
+button{cursor:pointer}
+a{color:var(--blue)}
+#stars{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:-1;opacity:.8}
+.wrap{width:min(100% - 32px,920px);margin:auto}
+nav{display:flex;justify-content:space-between;align-items:center;padding:18px 0;color:var(--muted);font-size:.88rem}
+.brand{letter-spacing:.12em;font-size:.76rem;text-transform:uppercase;color:var(--blue)}
+.pill{border:1px solid var(--line);border-radius:999px;padding:7px 12px;background:#0d1426;color:var(--pale)}
+.hero{min-height:78vh;display:grid;place-items:center;text-align:center;padding:48px 0 68px;position:relative}
+.eyebrow{color:var(--pink);letter-spacing:.2em;text-transform:uppercase;font-size:.72rem}
+h1{font-family:Georgia,"Times New Roman",serif;font-weight:400;line-height:1.08;font-size:clamp(3rem,11vw,6.5rem);margin:16px 0}
+h1 span{color:var(--blue);font-style:italic}
+.lead{max-width:560px;color:#c3cde0;margin:0 auto 26px;font-size:1.05rem}
+.primary,.secondary{border:0;border-radius:999px;padding:12px 20px;transition:transform .2s,background .2s}
+.primary{background:linear-gradient(120deg,#8ebcff,#d9c9ff);color:#091225;font-weight:700;box-shadow:0 8px 32px #6da8ff20}
+.secondary{background:#17233b;border:1px solid #35486c;color:var(--pale)}
+.primary:hover,.secondary:hover{transform:translateY(-2px)}
+.heart{display:inline-block;color:var(--pink);animation:pulse 1.8s infinite}
+@keyframes pulse{50%{transform:scale(1.16)}}
+section{padding:34px 0 42px}
+.section-head{text-align:center;margin-bottom:24px}
+.kicker{color:var(--blue);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase}
+h2{font-family:Georgia,serif;font-size:clamp(2rem,7vw,3.1rem);font-weight:400;margin:5px 0 8px}
+.sub{color:var(--muted);margin:0 auto;max-width:560px}
+.card{background:linear-gradient(145deg,#111a2eeb,#0d1425ed);border:1px solid var(--line);border-radius:22px;padding:clamp(18px,4vw,30px);box-shadow:0 18px 60px #0002}
+.counter{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:20px}
+.timebox{background:#0a1121;border:1px solid #263653;border-radius:15px;padding:16px 6px;text-align:center}
+.timebox strong{display:block;font-size:clamp(1.45rem,5vw,2.5rem);font-weight:500;color:var(--blue);font-variant-numeric:tabular-nums}
+.timebox span{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.photo-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.photo{min-height:180px;border-radius:18px;overflow:hidden;position:relative;background:linear-gradient(145deg,#1b2e4d,#10172a);border:1px solid #34425e;display:flex;align-items:center;justify-content:center;text-align:center;padding:16px;color:#c6d7f4}
+.photo img{width:100%;height:100%;position:absolute;inset:0;object-fit:cover}
+.photo .placeholder{position:relative;z-index:1;text-shadow:0 2px 12px #000;max-width:220px}
+.photo.has-image .placeholder{display:none}
+.photo small{display:block;color:#a9c6f6;margin-top:6px}
+.caption{font-family:Georgia,serif;font-style:italic;color:#b9c7df;text-align:center;margin:14px 0 0}
+.letter-card{text-align:center}
+.envelope{width:min(250px,75vw);height:165px;margin:20px auto 24px;position:relative;background:linear-gradient(145deg,#8caee0,#526d9d);border-radius:12px;box-shadow:0 16px 38px #0005;display:grid;place-items:center;overflow:hidden;border:1px solid #b4d0ff}
+.envelope:before{content:"";position:absolute;inset:0;background:linear-gradient(145deg,transparent 49%,#b9d0f5 50%,transparent 51%),linear-gradient(35deg,transparent 49%,#9bb9e9 50%,transparent 51%)}
+.envelope .seal{position:relative;z-index:1;border-radius:50%;width:48px;height:48px;display:grid;place-items:center;background:#111a30;color:#f3bfdc;border:1px solid #e5d4ff;font-size:1.35rem}
+.letter{max-width:650px;margin:0 auto;text-align:left;display:none;animation:appear .5s ease}
+.letter.open{display:block}
+.letter p{font-family:Georgia,serif;font-size:1.12rem;color:#e1e9f8}
+@keyframes appear{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.controls{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:18px}
+.musicbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:space-between}
+.music-title{display:flex;gap:12px;align-items:center}
+.disc{width:48px;height:48px;border-radius:50%;background:radial-gradient(circle,#111a30 0 12%,#d5c8f7 13% 17%,#253b60 18% 50%,#0b1020 51%);border:2px solid #738fbe;animation:spin 5s linear infinite;animation-play-state:paused}
+.disc.playing{animation-play-state:running}
+@keyframes spin{to{transform:rotate(360deg)}}
+.note{font-size:.83rem;color:var(--muted)}
+.quiz-q{font-size:1.15rem;margin:0 0 16px}
+.answers{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.answer{background:#111c32;border:1px solid #334564;color:var(--pale);border-radius:13px;padding:12px;text-align:left}
+.answer:hover{border-color:var(--blue)}
+.answer.correct{border-color:#83d9b1;background:#123126}
+.answer.wrong{border-color:#f2a4c4;background:#351c2c}
+#quizFeedback{min-height:28px;color:var(--pink);margin-top:14px}
+.surprise{display:none;text-align:center;padding:24px 8px}
+.surprise.show{display:block;animation:appear .5s}
+.surprise .big{font-size:3rem}
+footer{text-align:center;padding:36px 0 54px;color:#899ab7;font-size:.82rem}
+footer .signature{font-family:Georgia,serif;color:var(--pink);font-size:1.5rem;margin-top:6px}
+hr{border:0;border-top:1px solid var(--line);margin:22px 0}
+@media(max-width:540px){.wrap{width:min(100% - 24px,920px)}.hero{min-height:70vh;padding-top:34px}.counter{gap:6px}.timebox{padding:12px 3px}.timebox span{font-size:.62rem}.photo{min-height:145px;padding:10px}.answers{grid-template-columns:1fr}.musicbar{align-items:flex-start}.card{border-radius:18px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<canvas id="stars" aria-hidden="true"></canvas>
+<div class="wrap">
+  <nav><span class="brand">A + J · nuestro universo</span><button class="pill" id="topMusic" aria-label="Reproducir o pausar música">♫ Música</button></nav>
+  <header class="hero">
+    <div>
+      <div class="eyebrow">Para Josefina, con todo mi amor</div>
+      <h1>Vos y yo,<br><span>bajo las mismas estrellas.</span></h1>
+      <p class="lead">Si el universo es enorme, qué suerte la mía de haber coincidido con vos. Esta pequeña parte de internet es solamente nuestra. <span class="heart">♥</span></p>
+      <button class="primary" onclick="document.querySelector('#historia').scrollIntoView({behavior:'smooth'})">Entrar a nuestro universo ↓</button>
+    </div>
+  </header>
+
+  <section id="historia">
+    <div class="section-head"><div class="kicker">Desde aquel día</div><h2>El tiempo con vos</h2><p class="sub">Desde el 12 de mayo de 2025, cada día forma parte de nuestra historia.</p></div>
+    <div class="card">
+      <div style="text-align:center;color:var(--muted)">Llevamos compartiendo este universo…</div>
+      <div class="counter" aria-live="polite">
+        <div class="timebox"><strong id="days">—</strong><span>días</span></div>
+        <div class="timebox"><strong id="hours">—</strong><span>horas</span></div>
+        <div class="timebox"><strong id="minutes">—</strong><span>minutos</span></div>
+        <div class="timebox"><strong id="seconds">—</strong><span>segundos</span></div>
+      </div>
+      <p class="caption">Y todavía me quedan muchísimos momentos que quiero vivir con vos.</p>
+    </div>
+  </section>
+
+  <section id="fotos">
+    <div class="section-head"><div class="kicker">Pequeños infinitos</div><h2>Nuestros recuerdos</h2><p class="sub">Hay momentos que parecen simples hasta que te das cuenta de que son tus favoritos.</p></div>
+    <div class="photo-grid">
+      <div class="photo" data-photo="foto1.jpg"><div class="placeholder">✦<br>Acá va una foto de ustedes<small>Primer recuerdo</small></div></div>
+      <div class="photo" data-photo="foto2.jpg"><div class="placeholder">☾<br>Una de tus fotos favoritas<small>Ese día tan nuestro</small></div></div>
+      <div class="photo" data-photo="foto3.jpg"><div class="placeholder">♡<br>Una sonrisa que guardarías siempre<small>Mi lugar feliz</small></div></div>
+      <div class="photo" data-photo="foto4.jpg"><div class="placeholder">✧<br>Otro pedacito de nuestra historia<small>Y los que faltan</small></div></div>
+    </div>
+    <p class="caption">No son solamente fotos: son pedacitos de vida que me alegra compartir con vos.</p>
+  </section>
+
+  <section id="carta">
+    <div class="section-head"><div class="kicker">Abrí cuando quieras</div><h2>Un sobre para vos</h2><p class="sub">Hay algo que quería dejarte escrito, para que puedas volver a leerlo cuando lo necesites.</p></div>
+    <div class="card letter-card">
+      <div class="envelope" id="envelope" aria-label="Sobre de amor"><div class="seal">♥</div></div>
+      <button class="primary" id="openLetter">Abrir mi carta ✉</button>
+      <article class="letter" id="letter">
+        <hr>
+        <p>Mi Josee:</p>
+        <p>No sé si existen las palabras perfectas para explicar lo que alguien puede llegar a significar, pero sí sé que quería hacerte algo que fuera nuestro. Algo que te recuerde que, entre tantas personas y tantos caminos, me hace feliz compartir el mío con vos.</p>
+        <p>Me gustan nuestros momentos, nuestras charlas, las pequeñas cosas que capaz parecen insignificantes y que para mí terminan siendo recuerdos enormes. No necesito que cada día sea perfecto; quiero que podamos seguir aprendiendo, riéndonos, acompañándonos y creando más historias juntos.</p>
+        <p>Si alguna vez tenés un día difícil, volvé a esta página y acordate de que hay alguien que te quiere muchísimo y que agradece tenerte en su vida.</p>
+        <p>Gracias por ser vos, por lo que compartimos y por todo lo lindo que todavía nos queda por vivir.</p>
+        <p>Con todo mi cariño, siempre buscando nuevas formas de hacerte sonreír,</p>
+        <p style="color:var(--pink);font-size:1.5rem">Tu Alexis ♡</p>
+        <div style="text-align:center"><button class="secondary" id="closeLetter">Guardar la carta</button></div>
+      </article>
+    </div>
+  </section>
+
+  <section id="musica">
+    <div class="section-head"><div class="kicker">Nuestra banda sonora</div><h2>Una canción, mil recuerdos</h2><p class="sub">Elegí una canción que te haga pensar en ella y guardala junto a esta página.</p></div>
+    <div class="card musicbar">
+      <div class="music-title"><div class="disc" id="disc"></div><div><strong id="songName">Nuestra canción</strong><div class="note" id="songHint">Agregá tu archivo de audio para escucharla acá.</div></div></div>
+      <div class="controls" style="margin:0"><button class="primary" id="playMusic">▶ Reproducir</button><button class="secondary" id="pauseMusic">Ⅱ Pausar</button></div>
+    </div>
+    <p class="note" style="text-align:center;margin-top:12px">La música empieza solamente cuando alguien toca reproducir.</p>
+    <audio id="audio" preload="none" loop></audio>
+  </section>
+
+  <section id="quiz">
+    <div class="section-head"><div class="kicker">A ver cuánto nos conocemos</div><h2>Un mini juego para vos</h2><p class="sub">Elegí una respuesta. Después podés personalizar las preguntas para que sean 100% de ustedes.</p></div>
+    <div class="card">
+      <div class="kicker" id="quizProgress">Pregunta 1 de 3</div>
+      <p class="quiz-q" id="quizQuestion">¿Qué es lo que más quiero seguir coleccionando con vos?</p>
+      <div class="answers" id="answers"></div>
+      <div id="quizFeedback" aria-live="polite"></div>
+      <div class="controls" style="justify-content:flex-end"><button class="secondary" id="nextQuestion" disabled>Siguiente →</button></div>
+    </div>
+  </section>
+
+  <section id="sorpresa">
+    <div class="section-head"><div class="kicker">Una última cosita</div><h2>¿Te puedo mostrar algo?</h2><p class="sub">Tocá el botón. Prometo que lo hice con mucho amor.</p></div>
+    <div class="card" style="text-align:center">
+      <div style="font-size:2.4rem;margin-bottom:8px">✧ ☾ ✧</div>
+      <button class="primary" id="surpriseButton">Tengo una sorpresa para vos ♡</button>
+      <div class="surprise" id="surpriseMessage">
+        <div class="big">💌</div>
+        <h2 style="font-size:2.1rem">Te elegiría en cualquier universo.</h2>
+        <p class="sub">Entre todas las estrellas, todos los caminos y todas las casualidades, me sigue pareciendo increíble haberte encontrado a vos.</p>
+        <p style="color:var(--pink);font-family:Georgia,serif;font-size:1.3rem">Te quiero, Josefina. — Alexis</p>
+        <div style="font-size:1.6rem">♡ ✦ ♡ ✦ ♡</div>
+      </div>
+    </div>
+  </section>
+  <footer>Hecho con cariño, pensando en vos.<div class="signature">Alexis ♡ Josefina</div><div style="margin-top:10px">12 · 05 · 2025 — nuestro pequeño universo</div></footer>
+</div>
+<script>
+/* Fondo de estrellas */
+(() => {
+  const canvas=document.getElementById('stars'),ctx=canvas.getContext('2d');let stars=[];
+  function resize(){const dpr=Math.min(window.devicePixelRatio||1,2);canvas.width=innerWidth*dpr;canvas.height=innerHeight*dpr;canvas.style.width=innerWidth+'px';canvas.style.height=innerHeight+'px';ctx.setTransform(dpr,0,0,dpr,0,0);stars=Array.from({length:Math.min(150,Math.floor(innerWidth/7))},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*1.4+.25,a:Math.random()*.65+.15,p:Math.random()*6.28}))}
+  function draw(t){ctx.clearRect(0,0,innerWidth,innerHeight);for(const s of stars){const alpha=s.a*(.65+.35*Math.sin(t/900+s.p));ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(210,228,255,${alpha})`;ctx.fill()}requestAnimationFrame(draw)}
+  addEventListener('resize',resize);resize();requestAnimationFrame(draw);
+})();
+
+/* Contador desde el 12 de mayo de 2025. Ajustá la hora si querés contar desde un momento exacto. */
+const startDate=new Date(2025,4,12,0,0,0);
+function updateCounter(){let ms=Math.max(0,Date.now()-startDate.getTime());const day=86400000,hour=3600000,minute=60000;document.getElementById('days').textContent=Math.floor(ms/day).toLocaleString('es-AR');ms%=day;document.getElementById('hours').textContent=Math.floor(ms/hour);ms%=hour;document.getElementById('minutes').textContent=Math.floor(ms/minute);document.getElementById('seconds').textContent=Math.floor(ms/1000%60)}
+updateCounter();setInterval(updateCounter,1000);
+
+/* Fotos: poné foto1.jpg, foto2.jpg, foto3.jpg y foto4.jpg en la misma carpeta que este HTML. */
+document.querySelectorAll('[data-photo]').forEach(box=>{const img=new Image();img.src=box.dataset.photo;img.alt='Recuerdo de Alexis y Josefina';img.onload=()=>{box.prepend(img);box.classList.add('has-image')};});
+
+/* Carta */
+const letter=document.getElementById('letter'),envelope=document.getElementById('envelope'),openLetter=document.getElementById('openLetter');
+openLetter.addEventListener('click',()=>{letter.classList.add('open');envelope.style.transform='translateY(-5px) rotate(-2deg)';openLetter.textContent='La carta está abierta ♡';openLetter.disabled=true;});
+document.getElementById('closeLetter').addEventListener('click',()=>{letter.classList.remove('open');envelope.style.transform='';openLetter.textContent='Abrir mi carta ✉';openLetter.disabled=false;});
+
+/* Música: reemplazá cancion.mp3 por el nombre del archivo que agregues a la carpeta. */
+const audio=document.getElementById('audio'),play=document.getElementById('playMusic'),pause=document.getElementById('pauseMusic'),disc=document.getElementById('disc'),topMusic=document.getElementById('topMusic');
+audio.src='cancion.mp3';
+function playAudio(){audio.play().then(()=>{disc.classList.add('playing');play.textContent='♫ Reproduciendo';document.getElementById('songHint').textContent='Sonando para ustedes ♡'}).catch(()=>{document.getElementById('songHint').textContent='Agregá cancion.mp3 a la carpeta y probá de nuevo.'})}
+function pauseAudio(){audio.pause();disc.classList.remove('playing');play.textContent='▶ Reproducir'}
+play.addEventListener('click',playAudio);pause.addEventListener('click',pauseAudio);topMusic.addEventListener('click',()=>audio.paused?playAudio():pauseAudio());audio.addEventListener('ended',pauseAudio);
+
+/* Mini cuestionario. Personalizá el texto y las respuestas dentro de esta lista. */
+const questions=[
+ {q:'¿Qué es lo que más quiero seguir coleccionando con vos?',a:['Recuerdos juntos','Cosas caras','Seguidores','Excusas'],correct:0,why:'Exacto: más momentos, risas y recuerdos de nosotros ♡'},
+ {q:'¿Qué hace especial a nuestra historia?',a:['Que nunca hay días difíciles','Que somos perfectos','Que seguimos eligiéndonos y aprendiendo','Que siempre pensamos igual'],correct:2,why:'Eso mismo: no hace falta ser perfectos para construir algo lindo.'},
+ {q:'¿Qué quiero que te lleves de esta página?',a:['Una tarea','Una contraseña','Una lista de reglas','Un recordatorio de cuánto te quiero'],correct:3,why:'¡Sí! Esta página existe para sacarte una sonrisa y recordarte lo importante que sos.'}
+];
+let qi=0,answered=false;
+function renderQuestion(){const q=questions[qi];answered=false;document.getElementById('quizProgress').textContent=`Pregunta ${qi+1} de ${questions.length}`;document.getElementById('quizQuestion').textContent=q.q;document.getElementById('quizFeedback').textContent='';document.getElementById('nextQuestion').disabled=true;document.getElementById('nextQuestion').textContent=qi===questions.length-1?'Volver a jugar ↻':'Siguiente →';const area=document.getElementById('answers');area.innerHTML='';q.a.forEach((answer,i)=>{const b=document.createElement('button');b.className='answer';b.textContent=answer;b.addEventListener('click',()=>{if(answered)return;answered=true;area.querySelectorAll('button').forEach(x=>x.disabled=true);area.children[q.correct].classList.add('correct');if(i!==q.correct)b.classList.add('wrong');document.getElementById('quizFeedback').textContent=q.why;document.getElementById('nextQuestion').disabled=false});area.appendChild(b)})}
+document.getElementById('nextQuestion').addEventListener('click',()=>{if(!answered)return;qi=(qi+1)%questions.length;renderQuestion()});renderQuestion();
+
+/* Sorpresa */
+document.getElementById('surpriseButton').addEventListener('click',()=>{document.getElementById('surpriseMessage').classList.add('show');document.getElementById('surpriseButton').textContent='Una sorpresa hecha para vos ♡';document.getElementById('surpriseButton').disabled=true;});
+</script>
+</body>
+</html>
